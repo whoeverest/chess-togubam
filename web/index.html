@@ -11,7 +11,7 @@
             print
         };
         WebAssembly.instantiateStreaming(
-            fetch('scripts/hello.wasm'),
+            fetch('scripts/main.wasm'),
             { env }
         ).then(obj => {
             let { add_two } = obj.instance.exports;
