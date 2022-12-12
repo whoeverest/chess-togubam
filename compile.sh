@@ -1,3 +1,3 @@
 #!/bin/bash
 
-zig build-lib -O ReleaseFast -target wasm32-freestanding -dynamic hello.zig && cp ./hello.wasm web/scripts/hello.wasm
+zig build -Drelease-safe && cp out/hello.wasm web/scripts
