@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>Hi!</body>
+    <script>
+        function print(n) {
+            console.log(n);
+        }
+        const env = {
+            print
+        };
+        WebAssembly.instantiateStreaming(
+            fetch('scripts/hello.wasm'),
+            { env }
+        ).then(obj => {
+            let { add_two } = obj.instance.exports;
+            add_two(3, 5);
+        });
+    </script>
+</html>
