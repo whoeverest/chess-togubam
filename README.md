@@ -1,4 +1,4 @@
-# chess-togubam
+# chesstito
 An attempt at a chess engine.
 
 # how to install
