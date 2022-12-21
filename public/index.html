@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/chessground.base.css">
+        <link rel="stylesheet" href="css/chessground.brown.css">
+        <link rel="stylesheet" href="css/chessground.cburnett.css">
+
+    </head>
+    <body>
+        <div id="board" style="width: 500px; height: 500px"></div>
+    </body>
+    <script src="scripts/chessground.js"></script>
+    <script>
+        function convertToString (ptr, length, memory) {
+            try {
+                // The pointer is a multi byte character array encoded with utf-8.
+                const array = new Uint8Array(memory.buffer, ptr, length)
+                const decoder = new TextDecoder()
+                const string = decoder.decode(array)
+                return string
+            } finally {
+                // Free the memory
+                console.log("I am free")
+                // this.free(ptr)
+            }
+        };
+        function print(ptr, length) {
+            console.log(ptr, length);
+            // Convert a pointer from the wasm module to JavaScript string.
+
+        }
+        const env = {
+            print
+        };
+        WebAssembly.instantiateStreaming(
+            fetch('scripts/main.wasm'),
+            { env }
+        ).then(obj => {
+            let { play_next } = obj.instance.exports;
+            console.log(play_next("asdf"))
+            convertToString(play_next("asdf"), obj.instance.memory)
+        });
+    </script>
+</html>
